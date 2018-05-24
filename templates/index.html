@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<head>
+<title>Basic Flask</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+<div>
+    <h1> COUNTING</h1>
+    <h2 id=cnt> -- </h2>
+</div>
+</body>
+
+<script type="text/javascript">
+
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('connect', function() {
+        socket.emit('message', 'connected');
+        });
+
+    socket.on('count', function(message){
+        console.log(message.data);
+        document.getElementById('cnt').innerText=message.data;
+        });
+
+
+</script>
+
+
+
+</html>
