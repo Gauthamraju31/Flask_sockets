@@ -1,0 +1,39 @@
+<html>
+<header><title>This is title</title></header>
+<body>
+Hello world
+</body>
+<video autoplay></video>
+<script>
+function hasGetUserMedia() {
+  return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+}
+
+if (hasGetUserMedia()) {
+  // Good to go!
+
+} else {
+  alert('getUserMedia() is not supported by your browser');
+}
+
+</script>
+<script>
+const constraints = {
+  video: true
+};
+
+const video = document.querySelector('video');
+
+function handleSuccess(stream) {
+  video.srcObject = stream;
+}
+
+function handleError(error) {
+  console.error('Reeeejected!', error);
+}
+
+navigator.mediaDevices.getUserMedia(constraints).
+  then(handleSuccess).catch(handleError);
+</script>
+
+</html>
